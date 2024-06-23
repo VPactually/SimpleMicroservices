@@ -1,0 +1,29 @@
+server:
+  port: 0
+
+#Id server
+spring:
+  application:
+    name: payment-service
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  kafka:
+    bootstrap-servers: kafka:9091
+
+#Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    prefer-ip-address: true
+
+logging:
+  pattern:
+    console: "%C{1.} [%-5level] %d{HH:mm:ss.SSS} - %msg%n"
+  level:
+    root: warn
