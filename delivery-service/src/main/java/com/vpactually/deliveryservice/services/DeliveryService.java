@@ -1,5 +1,6 @@
 package com.vpactually.deliveryservice.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vpactually.deliveryservice.entities.Delivery;
 import com.vpactually.deliveryservice.entities.Order;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class DeliveryService {
@@ -30,17 +34,29 @@ public class DeliveryService {
     @SneakyThrows
     @KafkaListener(topics = "confirmed_order", groupId = "delivery_service_group")
     public void process(String message) {
-        System.out.println("Message in DeliveryService (confirmed_order): " + message);
-        var order = om.readValue(message, Order.class);
+
+        var order = getMessageAsOrderClass(message);
+        order.setStatus(OrderStatus.DELIVERY_IN_PROCESS);
         var delivery = new Delivery(order);
         repository.save(delivery);
-        order.setStatus(OrderStatus.DELIVERY_IN_PROCESS);
-        System.out.println("Message before sending to delivery-service (order_delivery): " + om.writeValueAsString(order));
         kafkaTemplate.send("order_delivery", om.writeValueAsString(order));
-        System.out.println("Message after sending to delivery-service (order_delivery): " + om.writeValueAsString(order));
         Thread.sleep(60000);
         order.setStatus(OrderStatus.DELIVERY_SUCCESS);
-        System.out.println("Message before sending to final-service: " + om.writeValueAsString(order));
+        repository.save(delivery);
         kafkaTemplate.send("order_delivery", om.writeValueAsString(order));
+    }
+
+    @SneakyThrows
+    @KafkaListener(topics = "failed_order", groupId = "failed_order_delivery_service")
+    public void rollback(String message) {
+        var backupOder = getMessageAsOrderClass(message);
+        backupOder.setStatus(OrderStatus.DELIVERY_FAILED);
+        var delivery = new Delivery(backupOder);
+        repository.save(delivery);
+    }
+
+    private Order getMessageAsOrderClass(String message) throws JsonProcessingException {
+        System.out.println("Message in AccountService (order): " + message);
+        return om.readValue(message, Order.class);
     }
 }

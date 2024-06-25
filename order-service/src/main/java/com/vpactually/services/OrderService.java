@@ -62,6 +62,9 @@ public class OrderService {
             case RESTAURANT_SUCCESS:
                 kafkaTemplate.send("confirmed_order", om.writeValueAsString(order));
                 break;
+            default:
+                kafkaTemplate.send("failed_order", om.writeValueAsString(backupOrder));
+                break;
         }
 
     }

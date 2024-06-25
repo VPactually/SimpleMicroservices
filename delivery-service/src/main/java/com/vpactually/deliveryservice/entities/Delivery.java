@@ -19,7 +19,6 @@ public class Delivery {
     private OrderStatus status;
 
     public Delivery(Order order) {
-        this.id = order.getId();
         this.userId = order.getUserId();
         this.address = order.getAddress();
         this.status =  order.getStatus();

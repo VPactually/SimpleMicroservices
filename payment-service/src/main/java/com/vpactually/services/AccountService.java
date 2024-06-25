@@ -1,5 +1,6 @@
 package com.vpactually.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vpactually.entities.Account;
 import com.vpactually.entities.Order;
@@ -39,14 +40,17 @@ public class AccountService {
     @SneakyThrows
     @KafkaListener(topics = "order", groupId = "order_service_group")
     public void process(String message) {
-        System.out.println("Message in AccountService (order): " + message);
-        var order = om.readValue(message, Order.class);
-        if (process(order.getUserId(), order.getPrice())) {
-            order.setStatus(OrderStatus.PAYMENT_SUCCESS);
-        } else {
-            order.setStatus(OrderStatus.PAYMENT_FAILED);
-        }
+        var order = getMessageAsOrderClass(message);
+        order.setStatus(process(order.getUserId(), order.getPrice()) ?
+                OrderStatus.PAYMENT_SUCCESS : OrderStatus.PAYMENT_FAILED);
         kafkaTemplate.send("order_payment", om.writeValueAsString(order));
+    }
+
+    @SneakyThrows
+    @KafkaListener(topics = "failed_order", groupId = "failed_order_payment_service")
+    public void rollback(String message) {
+        var backupOder = getMessageAsOrderClass(message);
+        add(backupOder.getUserId(), backupOder.getPrice());
     }
 
     public Boolean add(Integer userId, Integer amount) {
@@ -65,5 +69,10 @@ public class AccountService {
     public Account getAccount(Integer userId) {
         return repository.findByUserId(userId)
                 .orElseThrow();
+    }
+
+    private Order getMessageAsOrderClass(String message) throws JsonProcessingException {
+        System.out.println("Message in AccountService (order): " + message);
+        return om.readValue(message, Order.class);
     }
 }

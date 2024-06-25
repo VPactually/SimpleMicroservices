@@ -42,7 +42,8 @@
         </compositeConfiguration>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$USER_HOME$/Gradle/gradle-8.8" />
+        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-8.8" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -58,7 +59,8 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/api-gateway" />
-        <option name="gradleHome" value="$USER_HOME$/Gradle/gradle-8.8" />
+        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-8.8" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/api-gateway" />
@@ -68,7 +70,8 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/delivery-service" />
-        <option name="gradleHome" value="$USER_HOME$/Gradle/gradle-8.8" />
+        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-8.8" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/delivery-service" />
@@ -78,7 +81,8 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/eureka-server" />
-        <option name="gradleHome" value="$USER_HOME$/Gradle/gradle-8.8" />
+        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-8.8" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/eureka-server" />
@@ -88,7 +92,8 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/order-service" />
-        <option name="gradleHome" value="$USER_HOME$/Gradle/gradle-8.8" />
+        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-8.8" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/order-service" />
@@ -98,7 +103,8 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/payment-service" />
-        <option name="gradleHome" value="$USER_HOME$/Gradle/gradle-8.8" />
+        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-8.8" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/payment-service" />
@@ -108,7 +114,8 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/restaurant-service" />
-        <option name="gradleHome" value="$USER_HOME$/Gradle/gradle-8.8" />
+        <option name="gradleHome" value="C:/Program Files/Gradle/gradle-8.8" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/restaurant-service" />
