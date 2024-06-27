@@ -32,4 +32,8 @@ public class PaymentApplicationService {
         handler.handle(order);
     }
 
+    public void rollback(Order order) {
+        service.add(order.getUserId(), order.getPrice());
+    }
+
 }

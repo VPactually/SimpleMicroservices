@@ -21,4 +21,8 @@ public class KafkaPublisher {
     public void publishConfirmedOrder(String message) {
         kafkaTemplate.send("confirmed_order", message);
     }
+
+    public void publishFailedOrder(String message) {
+        kafkaTemplate.send("failed_order", message);
+    }
 }

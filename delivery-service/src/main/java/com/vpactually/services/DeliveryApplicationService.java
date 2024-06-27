@@ -16,4 +16,8 @@ public class DeliveryApplicationService {
         service.process(order);
         handler.handle(order);
     }
+
+    public void rollback(Order order) {
+        service.rollback(order);
+    }
 }

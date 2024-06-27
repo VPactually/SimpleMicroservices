@@ -40,16 +40,12 @@ public class RestaurantDomainService {
         }
     }
 
-
-//    @SneakyThrows
-//    @KafkaListener(topics = "failed_order", groupId = "failed_order_restaurant_service")
-//    public void rollback(String message) {
-//        var backupOder = getMessageAsOrderClass(message);
-//        var productIdsMap = backupOder.getProductIds().stream()
-//                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-//        var restProducts = repository.findAll();
-//        restProducts.forEach(product -> product.setQuantity(
-//                product.getQuantity() + productIdsMap.get(product.getId()).intValue()));
-//        repository.saveAll(restProducts);
-//    }
+    public void rollback(Order backupOrder) {
+        var productIdsMap = backupOrder.getProductIds().stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        var restProducts = repository.findAll();
+        restProducts.forEach(product -> product.setQuantity(
+                product.getQuantity() + productIdsMap.get(product.getId()).intValue()));
+        repository.saveAll(restProducts);
+    }
 }

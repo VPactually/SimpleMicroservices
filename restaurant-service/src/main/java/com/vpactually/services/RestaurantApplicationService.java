@@ -17,4 +17,8 @@ public class RestaurantApplicationService {
         handler.handle(order);
     }
 
+    public void rollback(Order order) {
+        service.rollback(order);
+    }
+
 }

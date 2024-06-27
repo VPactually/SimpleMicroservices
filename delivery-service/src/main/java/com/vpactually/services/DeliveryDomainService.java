@@ -6,8 +6,7 @@ import com.vpactually.repositories.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.vpactually.enums.OrderStatus.DELIVERY_IN_PROCESS;
-import static com.vpactually.enums.OrderStatus.DELIVERY_SUCCESS;
+import static com.vpactually.enums.OrderStatus.*;
 
 @Service
 @RequiredArgsConstructor
@@ -29,12 +28,9 @@ public class DeliveryDomainService {
         repository.save(delivery);
     }
 
-//    @SneakyThrows
-//    @KafkaListener(topics = "failed_order", groupId = "failed_order_delivery_service")
-//    public void rollback(String message) {
-//        var backupOder = getMessageAsOrderClass(message);
-//        backupOder.setStatus(OrderStatus.DELIVERY_FAILED);
-//        var delivery = new Delivery(backupOder);
-//        repository.save(delivery);
-//    }
+    public void rollback(Order backupOrder) {
+        backupOrder.setStatus(DELIVERY_FAILED);
+        var delivery = new Delivery(backupOrder);
+        repository.save(delivery);
+    }
 }
