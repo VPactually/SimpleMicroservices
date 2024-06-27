@@ -1,30 +1,30 @@
 package com.vpactually.controllers;
 
-import com.vpactually.entities.Account;
-import com.vpactually.services.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vpactually.dto.AccountDTO;
+import com.vpactually.entities.Order;
+import com.vpactually.services.PaymentApplicationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/account")
 public class AccountController {
 
-    private final AccountService service;
+    private final PaymentApplicationService service;
 
-    @Autowired
-    public AccountController(AccountService service) {
-        this.service = service;
+    @PostMapping
+    public AccountDTO createAccount(@RequestParam String userId) {
+        return service.createAccount(Integer.parseInt(userId));
     }
 
     @GetMapping("/{userId}")
-    public Account getAccount(@PathVariable String userId) {
+    public AccountDTO getAccount(@PathVariable String userId) {
         return service.getAccount(Integer.valueOf(userId));
     }
 
-    @PostMapping
-    public boolean createAccount(@RequestParam String userId) {
-        return service.createAccount(Integer.parseInt(userId));
+    @PostMapping("/add")
+    public AccountDTO add(@RequestBody Order order) {
+        return service.addMoney(order.getUserId(), order.getPrice());
     }
 }

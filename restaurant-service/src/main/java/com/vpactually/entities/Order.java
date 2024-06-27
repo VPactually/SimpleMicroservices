@@ -1,5 +1,6 @@
 package com.vpactually.entities;
 
+import com.vpactually.enums.OrderStatus;
 import lombok.Data;
 
 import java.util.List;
