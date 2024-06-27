@@ -25,6 +25,7 @@ dependencies {
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.projectlombok:lombok:1.18.32")
 	annotationProcessor("org.projectlombok:lombok:1.18.32")
+	implementation("org.postgresql:postgresql:42.7.3")
 	implementation("com.h2database:h2:2.2.224")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 }

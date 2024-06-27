@@ -3,13 +3,17 @@ server:
 
 #Id server
 spring:
+
   application:
     name: delivery-service
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: postgresql://postgres:postgres@postgres:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
   kafka:
     bootstrap-servers: kafka:9091
 

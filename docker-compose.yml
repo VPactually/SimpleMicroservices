@@ -15,9 +15,11 @@ services:
       - eureka-server
       - kafka
       - zookeeper
+      - postgres
     links:
       - kafka
       - eureka-server
+      - postgres
 
   payment-service:
     container_name: payment-service
@@ -27,9 +29,11 @@ services:
       - eureka-server
       - kafka
       - zookeeper
+      - postgres
     links:
       - kafka
       - eureka-server
+      - postgres
 
   restaurant-service:
     container_name: restaurant-service
@@ -39,9 +43,11 @@ services:
       - eureka-server
       - kafka
       - zookeeper
+      - postgres
     links:
       - kafka
       - eureka-server
+      - postgres
 
   delivery-service:
     container_name: delivery-service
@@ -51,9 +57,11 @@ services:
       - eureka-server
       - kafka
       - zookeeper
+      - postgres
     links:
       - kafka
       - eureka-server
+      - postgres
 
   api-gateway:
     container_name: api-gateway
@@ -104,6 +112,17 @@ services:
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
     depends_on:
       - zookeeper
+
+    postgres:
+      container_name: postgres
+      restart: always
+      image: postgres
+      ports:
+        - "5432:5432"
+      environment:
+        - POSTGRES_DB=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
 
 volumes:
   zookeeper-volume:
