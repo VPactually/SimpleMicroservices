@@ -17,7 +17,7 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         service.createAccount(1);
         service.add(1, 500);
         service.createAccount(2);

@@ -15,24 +15,24 @@ public class PaymentDomainService {
 
     private final AccountRepository repository;
 
-    public Order process(Order order) {
+    public void process(Order order) {
         var account = repository.findByUserId(order.getUserId())
                 .orElseThrow();
+
         if (account.getBalance() < order.getPrice()) {
             order.setStatus(PAYMENT_FAILED);
-            return order;
+            return;
         }
+
         account.setBalance(account.getBalance() - order.getPrice());
         repository.save(account);
         order.setStatus(PAYMENT_SUCCESS);
-        return order;
     }
 
     public Account add(Integer userId, Integer amount) {
         var account = repository.findByUserId(userId)
                 .orElseThrow();
         account.setBalance(account.getBalance() + amount);
-
         return repository.save(account);
     }
 

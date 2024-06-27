@@ -14,7 +14,6 @@ public class OrderDomainService {
     @Getter
     private Order backupOrder = null;
 
-
     public void save(Order order) {
         repository.save(order);
         backupOrder = order;

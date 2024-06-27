@@ -13,5 +13,4 @@ public class PaymentMapper {
         return new AccountDTO(account.getUserId(), account.getBalance());
     }
 
-
 }

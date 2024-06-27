@@ -21,6 +21,4 @@ public class PaymentCreateCommandHandler {
             throw new RuntimeException(e);
         }
     }
-
-
 }

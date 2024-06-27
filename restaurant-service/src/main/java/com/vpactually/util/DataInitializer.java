@@ -18,7 +18,7 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         service.create(new Product(null, "pizza", 5));
         service.create(new Product(null, "sushi", 10));
         service.create(new Product(null, "salad", 5));

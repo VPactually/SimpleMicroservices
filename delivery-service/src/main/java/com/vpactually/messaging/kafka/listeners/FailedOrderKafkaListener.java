@@ -22,7 +22,7 @@ public class FailedOrderKafkaListener {
     }
 
     private Order getMessageAsOrderClass(String message) {
-        System.out.println("Message in RestaurantService (order): " + message);
+        System.out.println("Message in DeliveryService (order): " + message);
         try {
             return om.readValue(message, Order.class);
         } catch (JsonProcessingException e) {

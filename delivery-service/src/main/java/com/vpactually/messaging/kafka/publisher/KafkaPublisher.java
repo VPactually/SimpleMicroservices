@@ -11,6 +11,6 @@ public class KafkaPublisher {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void publishOrderStatusFromDeliveryService(String message) {
-            kafkaTemplate.send("order_status_from_delivery_service", message);
+        kafkaTemplate.send("order_status_from_delivery_service", message);
     }
 }
