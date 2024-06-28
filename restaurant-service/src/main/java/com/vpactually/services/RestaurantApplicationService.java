@@ -1,24 +1,11 @@
 package com.vpactually.services;
 
 import com.vpactually.entities.Order;
-import com.vpactually.handlers.RestaurantCreateCommandHandler;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
-public class RestaurantApplicationService {
+public interface RestaurantApplicationService {
 
-    private final RestaurantCreateCommandHandler handler;
-    private final RestaurantDomainService service;
+    void checkOrder(Order order);
 
-    public void checkOrder(Order order) {
-        service.checkOrder(order);
-        handler.handle(order);
-    }
-
-    public void rollback(Order order) {
-        service.rollback(order);
-    }
+    void rollback(Order order);
 
 }

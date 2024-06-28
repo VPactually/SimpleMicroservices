@@ -1,35 +1,15 @@
 package com.vpactually.services;
 
 import com.vpactually.entities.Order;
-import com.vpactually.repositories.OrderRepository;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
-public class OrderDomainService {
+public interface OrderDomainService {
 
-    private final OrderRepository repository;
-    @Getter
-    private Order backupOrder = null;
+    void save(Order order);
 
-    public void save(Order order) {
-        repository.save(order);
-        backupOrder = order;
-    }
+    Order getOrderById(Integer id);
 
-    public Order getOrderById(Integer id) {
-        return repository.findById(id)
-                .orElseThrow();
-    }
+    void update(Order order);
 
-    public void update(Order order) {
-        repository.save(order);
-    }
-
-    public void deleteOrder(Integer id) {
-        repository.deleteById(id);
-    }
+    void deleteOrder(Integer id);
 }
 

@@ -2,38 +2,17 @@ package com.vpactually.services;
 
 import com.vpactually.dto.AccountDTO;
 import com.vpactually.entities.Order;
-import com.vpactually.handlers.PaymentCreateCommandHandler;
-import com.vpactually.mappers.PaymentMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
-@RequiredArgsConstructor
-public class PaymentApplicationService {
+public interface PaymentApplicationService {
 
-    private final PaymentCreateCommandHandler handler;
-    private final PaymentDomainService service;
-    private final PaymentMapper mapper;
+    AccountDTO createAccount(Integer userId);
 
-    public AccountDTO createAccount(Integer userId) {
-        return mapper.map(service.createAccount(userId));
-    }
+    AccountDTO getAccount(Integer userId);
 
-    public AccountDTO getAccount(Integer userId) {
-        return mapper.map(service.getAccount(userId));
-    }
+    AccountDTO addMoney(Integer userId, Integer amount);
 
-    public AccountDTO addMoney(Integer userId, Integer amount) {
-        return mapper.map(service.add(userId, amount));
-    }
+    void payOrder(Order order);
 
-    public void payOrder(Order order) {
-        service.process(order);
-        handler.handle(order);
-    }
-
-    public void rollback(Order order) {
-        service.add(order.getUserId(), order.getPrice());
-    }
+    void rollback(Order order);
 
 }
