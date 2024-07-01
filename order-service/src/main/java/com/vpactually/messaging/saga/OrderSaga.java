@@ -30,7 +30,7 @@ public class OrderSaga {
             case RESTAURANT_SUCCESS:
                 sagaConfirmedOrder(order);
                 break;
-            case DELIVERY_SUCCESS:
+            case DELIVERY_SUCCESS, DELIVERY_IN_PROCESS:
                 break;
             default:
                 onFailure(service.getBackupOrder());

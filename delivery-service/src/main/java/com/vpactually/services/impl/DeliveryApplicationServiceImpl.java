@@ -16,6 +16,13 @@ public class DeliveryApplicationServiceImpl implements DeliveryApplicationServic
     public void process(Order order) {
         service.process(order);
         handler.handle(order);
+        try {
+            Thread.sleep(30_000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        service.process(order);
+        handler.handle(order);
     }
 
     public void rollback(Order order) {

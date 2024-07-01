@@ -16,19 +16,18 @@ public class DeliveryDomainServiceImpl implements DeliveryDomainService {
     private final DeliveryRepository repository;
 
     public void process(Order order) {
-        order.setStatus(DELIVERY_IN_PROCESS);
-        var delivery = new Delivery(order);
-        repository.save(delivery);
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        deliveryResult(order);
+        if (order.getStatus().equals(DELIVERY_SUCCESS)) {
+            return;
         }
-        order.setStatus(DELIVERY_SUCCESS);
-        delivery.setStatus(DELIVERY_SUCCESS);
+        var delivery = new Delivery(order);
         repository.save(delivery);
     }
 
+    public void deliveryResult(Order order) {
+        order.setStatus(order.getStatus().equals(RESTAURANT_SUCCESS) ?
+                DELIVERY_IN_PROCESS : DELIVERY_SUCCESS);
+    }
     public void rollback(Order backupOrder) {
         backupOrder.setStatus(DELIVERY_FAILED);
         var delivery = new Delivery(backupOrder);

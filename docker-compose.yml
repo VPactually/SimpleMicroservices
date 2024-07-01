@@ -15,11 +15,9 @@ services:
       - eureka-server
       - kafka
       - zookeeper
-      - postgres
     links:
       - kafka
       - eureka-server
-      - postgres
 
   payment-service:
     container_name: payment-service
@@ -29,11 +27,9 @@ services:
       - eureka-server
       - kafka
       - zookeeper
-      - postgres
     links:
       - kafka
       - eureka-server
-      - postgres
 
   restaurant-service:
     container_name: restaurant-service
@@ -43,11 +39,9 @@ services:
       - eureka-server
       - kafka
       - zookeeper
-      - postgres
     links:
       - kafka
       - eureka-server
-      - postgres
 
   delivery-service:
     container_name: delivery-service
@@ -57,11 +51,9 @@ services:
       - eureka-server
       - kafka
       - zookeeper
-      - postgres
     links:
       - kafka
       - eureka-server
-      - postgres
 
   api-gateway:
     container_name: api-gateway
