@@ -11,5 +11,7 @@ public interface OrderDomainService {
     void update(Order order);
 
     void deleteOrder(Integer id);
-}
 
+    Order getBackupOrder();
+
+}

@@ -9,10 +9,10 @@ spring:
     hibernate:
       ddl-auto: create-drop
   datasource:
-    url: postgresql://postgres:postgres@postgres:5432/postgres
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: postgres
+    url: jdbc:h2:mem:order-db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
   kafka:
     bootstrap-servers: kafka:9091
 

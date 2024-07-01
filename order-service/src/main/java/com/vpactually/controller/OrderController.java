@@ -3,15 +3,15 @@ package com.vpactually.controller;
 import com.vpactually.dto.CreateOrderDTO;
 import com.vpactually.dto.OrderDTO;
 import com.vpactually.services.OrderApplicationService;
-import com.vpactually.services.OrderDomainService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
+@Slf4j
 public class OrderController {
 
     private final OrderApplicationService businessService;
@@ -19,6 +19,7 @@ public class OrderController {
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO get(@PathVariable String id) {
+        log.info("Getting order in Order Service{}", id);
         return businessService.find(Integer.parseInt(id));
     }
 
